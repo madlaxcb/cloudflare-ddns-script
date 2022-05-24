@@ -15,9 +15,10 @@ id_file="cloudflare.ids"
 log_file="cloudflare.log"
 
 
+
 if [ $record_type = "AAAA" ];then
     if [ $ip_index = "internet" ];then
-        ip=$(curl -6 ip.sb)
+        ip=$(curl -6 ip.ping0.cc)
     elif [ $ip_index = "local" ];then
         if [ "$user" = "root" ];then
             ip=$(ifconfig $eth_card | grep 'inet6'| grep -v '::1'|grep -v 'fe80' | cut -f2 | awk '{ print $2}' | head -1)
@@ -30,7 +31,7 @@ if [ $record_type = "AAAA" ];then
     fi
 elif [ $record_type = "A" ];then
     if [ $ip_index = "internet" ];then
-        ip=$(curl -4 ip.sb)
+        ip=$(curl -4 ip.ping0.cc )
     elif [ $ip_index = "local" ];then
         if [ "$user" = "root" ];then
             ip=$(ifconfig $eth_card | grep 'inet'| grep -v '127.0.0.1' | grep -v 'inet6'|cut -f2 | awk '{ print $2}')
